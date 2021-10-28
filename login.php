@@ -17,7 +17,12 @@
             }
             else{
                 $_SESSION['id_tk']=$row['id_tk'];
-                header("Location:user/profile.html");
+                ?>
+                    <script>
+                        window.alert('--Đăng nhập thành công--');
+                        window.location.href='user/profile.php?id_tk=<?php echo $id_tk; ?>';
+                    </script>
+                <?php
             }
         }
         else{

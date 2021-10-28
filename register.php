@@ -23,7 +23,12 @@
             $sql_re = "INSERT INTO taikhoan (taikhoan, matkhau) VALUES ('$tk','$mk')";
             $result_re = mysqli_query($conn,$sql_re);
             if($result_re==TRUE){
-                header("Location:login.php");
+                ?>
+                    <script>
+                        window.alert('--Đăng ký thành công--');
+                        window.location.href='login.php';
+                    </script>
+                <?php
             }
         }
 
