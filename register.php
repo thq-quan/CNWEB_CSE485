@@ -7,10 +7,8 @@
         $mk1 = $_POST['mk1'];
 
         if($mk != $mk1){
-            echo "<script>
-            alert('Mật khẩu không trùng khớp');
-              window.location='http://localhost/btl-web/register.php';
-            </script>";
+            echo "Mật khẩu không trùng khớp!";
+            header("Location:register.php");
         }
 
 
@@ -18,12 +16,10 @@
         $result = mysqli_query($conn,$sql);
         
         if(mysqli_num_rows($result)>0){
-            echo "<script>
-            alert('tài khoản hiện đã được sử dụng rồi');
-            window.location='http://localhost/btl-web/register.php';
-            </script>";
+            echo "Tài khoản đã được sử dụng!";
+            header("Location:register.php");
         }
-        elseif($mk == $mk1){
+        else{
             $sql_re = "INSERT INTO taikhoan (taikhoan, matkhau) VALUES ('$tk','$mk')";
             $result_re = mysqli_query($conn,$sql_re);
             if($result_re==TRUE){
@@ -49,7 +45,7 @@
         integrity="sha384-UHRtZLI+pbxtHCWp1t77Bi1L4ZtiqrqD80Kn4Z8NTSRyMA2Fd33n5dQ8lWUE00s/" crossorigin="anonymous">
     <link href="css/bootstrap.min.css" rel="stylesheet">
     <link href="css/my-sytle.css" rel="stylesheet">
-    <title></title>
+    <title>Sign Up</title>
 </head>
 
 <body>
@@ -62,7 +58,7 @@
                             <div class="mb-md-5 mt-md-4 pb-5">
                                 <h2 class="fw-bold mb-2 text-uppercase">Sign Up</h2>
                                 <p class="text-white-50 mb-5">Please enter your information!</p>
-                                <form action="">
+                                <form method="POST">
                                     <div class="row mb-3">
                                         <div class="col-3 form-outline form-white my-auto">
                                             <label class="form-label">User Name</label>
@@ -88,8 +84,7 @@
                                         </div>
                                     </div>
                                     <div class="mb-5 mt-5">
-                                        <button class="btn btn-outline-light btn-lg px-5" name="submit"
-                                        type="submit">Register</button> 
+                                        <button class="btn btn-outline-light btn-lg px-5" name="submit" type="submit">Register</button> 
                                     </div>
                                 </form>
                             </div>
