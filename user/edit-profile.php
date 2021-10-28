@@ -113,12 +113,12 @@
                 <div class="d-flex flex-column align-items-center text-center p-3 py-5">
                     <?php
                        if($img == null){?>
-                    <img class="rounded-circle mt-5" width="150px" src="../img/avata.png">
-                    <?php   
+                            <img class="rounded-circle mt-5" width="150px" src="../img/avata.png">
+                        <?php   
                        }else{
                            ?>
-                    <img class="rounded-circle mt-5" width="150px" src="../img/avata.png">
-                    <?php
+                            <img class="rounded-circle mt-5" width="150px" src="../img/<?php echo $img; ?>">
+                        <?php
                        }
                     ?>
                     <span class="font-weight-bold mt-2">
@@ -176,7 +176,7 @@
                                 </div>
                             </div>
                             <div class="col-md-6">  
-                                    <div class="col-md-12 mt-3  ">
+                                    <div class="col-md-12 mt-3">
                                         <label class="labels">Website</label>
                                         <input type="text" name="website" class="form-control" placeholder="<?php echo $website; ?>" value="<?php echo $website; ?>">
                                     </div>

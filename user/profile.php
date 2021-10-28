@@ -29,6 +29,7 @@
       $tw = $row['tw'];
       $ig = $row['ig'];
       $fb = $row['fb'];
+      $img = $row['img'];
   }else {
     echo "Đã có lỗi xảy ra";
     // header('Location:../home.html');
@@ -78,7 +79,16 @@
             <div class="col-lg-4">
               <div class="card mb-4">
                 <div class="card-body text-center">
-                  <img src="../img/avata.png" alt="avatar" class="rounded-circle img-fluid" style="width: 150px;">
+                  <?php
+                       if($img == null){?>
+                            <img class="rounded-circle img-fluid" style="width: 150px;" src="../img/avata.png">
+                        <?php   
+                       }else{
+                           ?>
+                            <img class="rounded-circle img-fluid" style="width: 150px;" src="../img/<?php echo $img; ?>">
+                        <?php
+                       }
+                    ?>
                   <h5 class="my-3"><?php echo $tk; ?></h5>
                 </div>
               </div>
@@ -154,6 +164,25 @@
                   <div class="card mb-4 mb-md-0">
                     <div class="card-body">
 
+                      <div class="row border-bottom border-primary mt-2 mb-2">
+                        <div class="col-9">
+                            <h4>Họp mặt cựu sinh viên K60</h4>
+                            <p>Time:19/02/2022</p>
+                        </div>
+                        <div class="col-3 my-auto">
+                            <button class="btn btn-dark">Xem</button>
+                        </div>                       
+                      </div>
+                      <div class="row border-bottom border-primary mt-2 mb-2">
+                        <div class="col-9">
+                            <h4>Họp mặt cựu sinh viên K60</h4>
+                            <p>Time:19/02/2022</p>
+                        </div>
+                        <div class="col-3 my-auto">
+                            <button class="btn btn-dark">Xem</button>
+                        </div>                        
+                      </div>
+
                     </div>
                   </div>
                 </div>
@@ -161,6 +190,14 @@
                   <div class="card mb-4 mb-md-0">
                     <div class="card-body">
 
+                      <div class="row border-bottom border-primary mb-2 mt-2">
+                        <div class="col-9">
+                          <h4>Chat1</h4>
+                        </div>
+                        <div class="col-3 my-auto">
+                            <button class="btn btn-dark">Vào</button>
+                        </div> 
+                      </div>
                     </div>
                   </div>
                 </div>
