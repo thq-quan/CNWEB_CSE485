@@ -3,10 +3,10 @@
 
   session_start();
 
-  // if(isset($_SESSION['id_tk'])){
-  //   echo $_SESSION['id_tk'];
-  //   unset($_SESSION['id_tk']);
-  // }
+  if(isset($_SESSION['id_tk'])){
+    echo $_SESSION['id_tk'];
+    unset($_SESSION['id_tk']);
+  }
   
   if(isset($_GET['id_tk'])){
     $id_tk = $_GET['id_tk'];
@@ -30,7 +30,8 @@
       $ig = $row['ig'];
       $fb = $row['fb'];
   }else {
-    echo "lỗi";
+    echo "Đã có lỗi xảy ra";
+    // header('Location:../home.html');
   }
 
   }
@@ -69,7 +70,7 @@
           </div>
           <div class="row justify-content-start mb-3">
             <div class="col-lg-3">
-              <a href="edit-profile.html"><button class="btn btn-success">Edit Profile</button></a>
+              <a href="edit-profile.php?id_tk=<?php echo $id_tk; ?>"><button class="btn btn-success">Edit Profile</button></a>
             </div>
           </div>
       
