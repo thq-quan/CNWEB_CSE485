@@ -1,35 +1,63 @@
 <?php
-    require_once('config/config.php');
+    require_once ('../db/dbhelper.php');
     session_start();
-    if(isset($_POST['submit'])){
-        $tk = $_POST['tk'];
-        $mk = $_POST['mk'];
-        $sql = "SELECT * FROM taikhoan WHERE taikhoan='$tk' AND matkhau='$mk'";
-        $result = mysqli_query($conn,$sql);
 
-        if(mysqli_num_rows($result) > 0){
-            $row=mysqli_fetch_array($result);
-            $id_tk=$row['id_tk'];
+    if (isset($_POST['submit']) && $_POST["tk"] != '' && $_POST["mk"] != '') 
+    {
+            $username      = $_POST["tk"];
+            $password      = $_POST["mk"] ;
 
-            if ($row['chucvu']==1){
-                $_SESSION['id_tk']=$row['id_tk'];
-                header("Location:admin/index.html");
+            $verf       = "select password from user where username ='$username' ";
+            $verify  = select_one($verf);
+            if ($verify != null) {
+                $v = $verify['password'];
+            }else{
+                echo "<script>
+                          alert('Account does not exist');
+                          window.location='http://localhost/CNWEB_CSE485/login/login.php';
+                          </script>";
+                        
             }
+            
+            $check = password_verify($password,$v) ;
+            if ($check) {
+
+            $sql        = "select * from user where username ='$username'";
+            $stt        = select_one($sql);
+            $user       = select($sql); 
+            if ( $stt != null) {
+                $status = $stt['type'];
+            }           
+            
+
+            if(mysqli_num_rows($user)>0){
+                if($status == 1){   
+                    echo "<script>
+                          alert('--- Hello admin! Redirect login to admin page----');
+                          window.location='http://localhost/CNWEB_CSE485/admin/Account/index.php';
+                          </script>";
+                          $_SESSION["username"] = $username;
+                    
+
+                }
+                else{
+
+                $_SESSION["username"] = $username;
+                header("Location: ../index.php");
+                }
+            }}
             else{
-                $_SESSION['id_tk']=$row['id_tk'];
-                ?>
-                    <script>
-                        window.alert('--Đăng nhập thành công--');
-                        window.location.href='user/profile.php?id_tk=<?php echo $id_tk; ?>';
-                    </script>
-                <?php
+                echo "<script>
+                          alert('Password is incorect');
+                          window.location='http://localhost/CNWEB_CSE485/login/login.php';
+                          </script>";
+                        
             }
-        }
-        else{
-            header("Location:login.php");
-        }
+
     }
+
 ?>
+
 
 
 <!DOCTYPE html>
@@ -70,7 +98,7 @@
                                     </div>                               
                                 </form>
                             <div>
-                                <p class="mb-0">Don't have an account? <a href="register.php" class="text-white-50 fw-bold">Sign Up</a></p>
+                                <p class="mb-0">Don't have an account? <a href="../Register/register.php" class="text-white-50 fw-bold">Sign Up</a></p>
                             </div>
                         </div>
                     </div>

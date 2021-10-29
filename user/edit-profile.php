@@ -1,9 +1,9 @@
 <?php
-    require_once('../config/config.php');
+    require_once('../db/dbhelper.php');
     session_start();
 
     $id_tk = $_GET['id_tk'];
-    $sql = "SELECT * FROM taikhoan WHERE id_tk = $id_tk";
+    $sql = "SELECT * FROM user WHERE id_tk = $id_tk";
     $result = mysqli_query($conn, $sql);
     
     if($result == TRUE){

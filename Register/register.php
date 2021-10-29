@@ -1,39 +1,48 @@
 <?php
-    require_once('config/config.php');
+    require_once ('../db/dbhelper.php');
+    session_start();
+    if (isset($_POST['submit']) && $_POST["ten"] != ''
+    && $_POST["tk"] != '' && $_POST["mk"] != '' && $_POST["mk1"] != '') 
+    {   
+        $displayname = $_POST["ten"];
+        $username   = $_POST["tk"];
+        $password   =($_POST["mk"]);
+        $repassword = ($_POST["mk1"]);
 
-    if(isset($_POST['submit'])){
-        $tk = $_POST['tk'];
-        $mk = $_POST['mk'];
-        $mk1 = $_POST['mk1'];
-
-        if($mk != $mk1){
-            echo "Mật khẩu không trùng khớp!";
-            header("Location:register.php");
-        }
-
-
-        $sql = "SELECT * FROM taikhoan WHERE taikhoan = '$tk'";
-        $result = mysqli_query($conn,$sql);
-        
-        if(mysqli_num_rows($result)>0){
-            echo "Tài khoản đã được sử dụng!";
-            header("Location:register.php");
-        }
-        else{
-            $sql_re = "INSERT INTO taikhoan (taikhoan, matkhau) VALUES ('$tk','$mk')";
-            $result_re = mysqli_query($conn,$sql_re);
-            if($result_re==TRUE){
-                ?>
-                    <script>
-                        window.alert('--Đăng ký thành công--');
-                        window.location.href='login.php';
-                    </script>
-                <?php
+            if( $password!=$repassword ){           
+                echo "<script>
+                          alert('Password does not match');
+                            window.location='http://localhost/CNWEB_CSE485/Register/register.php';
+                          </script>";
             }
-        }
 
+
+            $sql      = "select * from user where username = '$username'";
+            $old      = select($sql);
+
+
+
+            if( mysqli_num_rows($old) > 0){
+                echo "<script>
+                      alert('Account is already in use');
+                      window.location='http://localhost/CNWEB_CSE485/Register/register.php';
+                      </script>";
+            }
+
+            else if($password==$repassword){
+                $password = password_hash($password, PASSWORD_DEFAULT);
+                $sql="insert into user(displayname,username,password) values('$displayname','$username','$password')";
+                 // print($sql);
+                 // exit();
+                select($sql);
+
+                echo "<script>
+                      alert('Successful account registration !!!!!');
+                      window.location='http://localhost/CNWEB_CSE485/Login/login.php';
+                      </script>";
+
+                }
     }
-
 
 
 ?>
@@ -62,6 +71,14 @@
                                 <h2 class="fw-bold mb-2 text-uppercase">Sign Up</h2>
                                 <p class="text-white-50 mb-5">Please enter your information!</p>
                                 <form method="POST">
+                                    <div class="row mb-3">
+                                        <div class="col-3 form-outline form-white my-auto">
+                                            <label class="form-label">Display Name</label>
+                                        </div>
+                                        <div class="col-9 form-outline form-white my-auto">
+                                            <input type="text" name="ten" class="form-control form-control-lg">
+                                        </div>
+                                    </div>
                                     <div class="row mb-3">
                                         <div class="col-3 form-outline form-white my-auto">
                                             <label class="form-label">User Name</label>
