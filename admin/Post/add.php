@@ -124,10 +124,11 @@ if (isset($_GET['id'])) {
             <hr>
             
 
-          <h2>Ngày</h2>
+          
             <div class="row">
 
-              <input style="margin-left: 40%;margin-bottom: 1%" type="date" name="date" value="<?=$date?>">
+              <h2>Ngày</h2>
+			  <input style="margin-left: 40%;margin-bottom: 1%" type="date" name="date" value="<?=$date?>">
 					 	  
 
         </div>
@@ -145,14 +146,13 @@ if (isset($_GET['id'])) {
           </div>                    
     
             <hr>
-          </div>
 
         <!-- address -->
        
 
         
           
-         <div class="form-group">
+         <div class="form-group" id="info">
 					  <label for="thumbnail">Thumbnail:</label>
 					  
 					  <input required="true" placeholder="../../" type="text" class="form-control" id="thumbnail" name="thumbnail" value="<?=$thumbnail?>" onchange="updateThumbnail()">
@@ -164,7 +164,7 @@ if (isset($_GET['id'])) {
            				 <textarea class="form-control"  rows="6" name="content" id="content"?><?=$content?></textarea>
           	</div>
 		</div>
-
+		</div>
    
         	<button class="btn btn-success">Save</button>
 

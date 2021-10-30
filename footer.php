@@ -7,8 +7,8 @@
     
   <div class="col-xs-12 col-sm-6 col-md-3">
   <div class="widget subscribe no-box" style="margin-left: 30px">
-  <h5 class="widget-title"><a class="logo" href="https://vinuni.edu.vn/">
-					<img src="http://www.tlu.edu.vn/Portals/_default/skins/tluvie/images/logo.png" alt="footer logo" width="350" height="100"></a></h5>
+  <h5 class="widget-title"><a class="logo" href="">
+					<img src="http://www.tlu.edu.vn/Portals/_default/skins/tluvie/images/logo.png" alt="footer logo" width="300" height="90"></a></h5>
    </div>
   </div>
   <div class="col-xs-12 col-sm-6 col-md-3">

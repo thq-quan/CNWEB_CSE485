@@ -30,7 +30,7 @@
             <div class="col-xs-8 mx-auto col-lg mb-4 mb-lg-0">
                   <section class="news-event ">
                     <div class="px-0 py-3">
-                  <h2 class="text-capitalize font-weight-light m-0">Thông tin & Sự Kiện</h2>
+                  <h2 class="text-capitalize font-weight-light m-0">Thông tin bên lề</h2>
                 </div>
                 <div class="feature-box-list">
                   <div class="d-block">

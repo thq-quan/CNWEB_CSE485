@@ -23,7 +23,7 @@ require_once('../check_admin.php');
 	td{
 	font-weight : bold ; color : white; font-size : 1.3rem	;}
 </style>
-<body style="background:url(https://vinuni.edu.vn/wp-content/uploads/2020/05/QuangTruong3-scaled.jpg); overflow-y: hidden; ">
+<body style="background:url(http://khohinhdep.com/wp-content/uploads/2017/10/hinh-nen-dien-thoai-lg-v20-chat-luong-qhd-010.jpg); overflow-y: hidden; ">
 	<ul class="nav nav-tabs">
 	  
 	 
@@ -40,7 +40,7 @@ require_once('../check_admin.php');
 	<div class="container">
 		<div class="panel panel-primary">
 			<div class="panel-heading">
-				<h2 class="text-center" style="color: #FFFFFF;">Account Management</h2>
+				<h2 class="text-center text-dark">Account Management</h2>
 			</div>
 			<div class="panel-body">
 				<a href="add.php">
@@ -80,10 +80,10 @@ foreach ($userList as $item) {
 			$type_acc = "Admin";
 		}
 	echo '<tr>
-				<td class="text-warning">'.($index++).'</td>
-				<td >'.$item['username'].'</td>
+				<td class="text-dark">'.($index++).'</td>
+				<td class="text-dark" >'.$item['username'].'</td>
 				
-				<td >'.$type_acc.'</td>
+				<td class="text-dark" >'.$type_acc.'</td>
 				<td style = "width: 18%" >
 					
 					<a href="ChangeTypeAcc.php?id='.$item['id'].'"><button class="btn btn-info">Change</button></a>

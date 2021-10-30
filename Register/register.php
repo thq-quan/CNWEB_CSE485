@@ -109,7 +109,7 @@
                                 </form>
                             </div>
                             <div>
-                                <p class="mb-0">You have an account? <a href="login.php" class="text-white-50 fw-bold">Login</a></p>
+                                <p class="mb-0">You have an account? <a href="../login/login.php" class="text-white-50 fw-bold">Login</a></p>
                             </div>
                         </div>
                     </div>
