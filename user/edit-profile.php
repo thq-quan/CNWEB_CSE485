@@ -2,89 +2,88 @@
     require_once('../db/dbhelper.php');
     session_start();
 
-    $id_tk = $_GET['id_tk'];
-    $sql = "SELECT * FROM user WHERE id_tk = $id_tk";
-    $result = mysqli_query($conn, $sql);
+    $id = $_GET['id'];
+    $sql = "select * from info_user where id = $id";
+    $name = $dateofbirth = $sex = $address = $email = $phone = $website = $github = $tw = $ig = $fb = $avatar = '';
+    $profile = select_one($sql);
     
-    if($result == TRUE){
-        $count = mysqli_num_rows($result);
-        if($count == 1){
-            $row = mysqli_fetch_assoc($result);
-            $id_tk = $row['id_tk'];
-            $taikhoan = $row['taikhoan'];
-            $ten = $row['ten'];
-            $ngaysinh = $row['ngaysinh'];
-            $gioitinh = $row['gioitinh'];
-            $diachi = $row['diachi'];
-            $email = $row['email'];
-            $sdt = $row['sdt'];
-            $lop = $row['lop'];
-            $website = $row['website'];
-            $github = $row['github'];
-            $tw = $row['tw'];
-            $ig = $row['ig'];
-            $fb = $row['fb'];
-            $img = $row['img'];
-        }
+    if($profile != null){
+        $name = $profile['name'];
+        $dateofbirth = $profile['dateofbirth'];
+        $sex = $profile['sex'];
+        $address = $profile['address'];
+        $email = $profile['email'];
+        $phone = $profile['phone'];
+        $website = $profile['website'];
+        $github = $profile['github'];
+        $tw = $profile['tw'];
+        $ig = $profile['ig'];
+        $fb = $profile['fb'];
+  
+        $a='../../';
+        $b=" ".$profile["avatar"];
+        if(strpos($b,$a)){ //  kiểm tra a có trong b không
+          $profile["avatar"] = str_replace('../../images','images' ,$profile["avatar"]);
+         }
         else{
-            ?>
-            <script>
-                window.location.href = 'profile.php?id_tk=<?php echo $id_tk; ?>';
-            </script>
-        <?php
+             $profile["avatar"] = $profile["avatar"] ;
+       
         }
-    }
+        $avatar = $profile['avatar'];
+      }
 
-    if (isset($_POST['submit'])){
+      if (!empty($_POST)){
+        if (isset($_POST['name'])) {
+            $name = $_POST['name'];
+        }
+        if (isset($_POST['dateofbirth'])) {
+            $dateofbirth = $_POST['dateofbirth'];
+        }
+        if (isset($_POST['sex'])) {
+            $sex = $_POST['sex'];
+        }
+        if (isset($_POST['address'])) {
+            $address = $_POST['address'];
+        }
+        if (isset($_POST['email'])) {
+            $email = $_POST['email'];
+        }
+        if (isset($_POST['phone'])) {
+            $phone = $_POST['phone'];
+        }
+        if (isset($_POST['avatar'])) {
+            $avatar = $_POST['avatar'];
+        }
+        if (isset($_POST['website'])) {
+            $website = $_POST['website'];
+        }
+        if (isset($_POST['github'])) {
+            $github = $_POST['github'];
+        }
+        if (isset($_POST['tw'])) {
+            $tw = $_POST['tw'];
+        }
+        if (isset($_POST['ig'])) {
+            $ig = $_POST['ig'];
+        }
+        if (isset($_POST['fb'])) {
+            $fb = $_POST['fb'];
+        }
 
-        $ten = $_POST['ten'];
-        $ngaysinh = $_POST['ngaysinh'];
-        $gioitinh = $_POST['gioitinh'];
-        $diachi = $_POST['diachi'];
-        $email = $_POST['email'];
-        $sdt = $_POST['sdt'];
-        $lop = $_POST['lop'];
-        $website = $_POST['website'];
-        $github = $_POST['github'];
-        $tw = $_POST['tw'];
-        $ig = $_POST['ig'];
-        $fb = $_POST['fb'];
-        $img = $_POST['img'];
-
-        $sql = "UPDATE taikhoan SET
-        ten='$ten',
-        ngaysinh='$ngaysinh',
-        gioitinh='$gioitinh',
-        diachi='$diachi',
-        email='$email',
-        sdt= '$sdt',
-        lop='$lop',
-        img='$img',
-        website = '$website',
-        github = '$github',
-        tw = '$tw',
-        ig = '$ig',
-        fb = '$fb'
         
-        WHERE id_tk='$id_tk'
-        ";
-        $result = mysqli_query($conn, $sql);
+	if (!empty($name)) {
+		$id = $_GET['id'];
+		$sql = 'update info_user set name = "'.$name.'", dateofbirth = "'.$dateofbirth.'", sex = "'.$sex.'", address = "'.$address.'", email = "'.$email.'",
+        phone = "'.$phone.'", website = "'.$website.'", github = "'.$github.'", tw = "'.$tw.'", ig = "'.$ig.'", fb = "'.$fb.'" where id = '.$id;
+		select($sql);
+        echo "<script>
+        alert('Username is already in use');
+        window.location='http://localhost/CNWEB_CSE485/user/profile.php?id=$id';
+        </script>" ;	
+        die();
+	}
 
-        if($result == TRUE){
-            ?>
-            <script>
-                window.location.href = 'profile.php?id_tk=<?php echo $id_tk; ?>';
-            </script>
-        <?php
-        }
-        else{
-            ?>
-            <script>
-                window.location.href = 'edit-profile.php?id_tk=<?php echo $id_tk; ?>';
-            </script>
-        <?php
-        }
-    }
+      }
 
 ?>
 
@@ -98,8 +97,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css"
-        integrity="sha384-UHRtZLI+pbxtHCWp1t77Bi1L4ZtiqrqD80Kn4Z8NTSRyMA2Fd33n5dQ8lWUE00s/" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css">
     <title></title>
 </head>
 
@@ -110,17 +108,17 @@
             <div class="col-md-3 border-right">
                 <div class="d-flex flex-column align-items-center text-center p-3 py-5">
                     <?php
-                       if($img == null){?>
+                       if($avatar == null){?>
                             <img class="rounded-circle mt-5" width="150px" src="../img/avata.png">
                         <?php   
                        }else{
                            ?>
-                            <img class="rounded-circle mt-5" width="150px" src="../img/<?php echo $img; ?>">
+                            <img class="rounded-circle mt-5" width="150px" src="<?=$avatar?>">
                         <?php
                        }
                     ?>
                     <span class="font-weight-bold mt-2">
-                        <?php echo $taikhoan; ?>
+                        <?=$name?>
                     </span>
                     <span></span>
                 </div>
@@ -138,68 +136,64 @@
                             <div class="col-md-6 border-right">
                                 <div class="col-md-12 mt-3">
                                     <label class="labels">Họ và Tên</label>
-                                    <input type="text" name="ten" class="form-control" placeholder="<?php echo $ten; ?>" value="<?php echo $ten; ?>">
+                                    <input type="text" name="name" class="form-control" placeholder="<?=$name?>" value="<?=$name?>">
                                 </div>
                                 <div class="col-md-12 mt-3">
                                     <label class="labels">Ngày sinh</label>
-                                    <input type="date" name="ngaysinh" class="form-control" placeholder="<?php echo $ngaysinh; ?>"
-                                        value="<?php echo $ngaysinh; ?>">
+                                    <input type="date" name="dateofbirth" class="form-control" placeholder="<?=$dateofbirth?>"
+                                        value="<?=$dateofbirth?>">
                                 </div>
                                 <div class="col-md-12 mt-3">
                                     <label class="labels">Giới tính</label>
-                                    <input type="text" name="gioitinh" class="form-control" placeholder="<?php echo $gioitinh; ?>"
-                                        value="<?php echo $gioitinh; ?>">
+                                    <input type="text" name="sex" class="form-control" placeholder="<?=$sex?>"
+                                        value="<?=$sex?>">
                                 </div>
                                 <div class="col-md-12 mt-3">
                                     <label class="labels">Địa chỉ</label>
-                                    <input type="text" name="diachi" class="form-control" placeholder="<?php echo $diachi; ?>"
-                                        value="<?php echo $diachi; ?>">
+                                    <input type="text" name="address" class="form-control" placeholder="<?=$address?>"
+                                        value="<?=$address?>">
                                 </div>
                                 <div class="col-md-12 mt-3">
                                     <label class="labels">Email</label>
-                                    <input type="text" name="email" class="form-control" placeholder="<?php echo $email; ?>"
-                                        value="<?php echo $email; ?>">
+                                    <input type="text" name="email" class="form-control" placeholder="<?=$email?>"
+                                        value="<?=$email?>">
                                 </div>
                                 <div class="col-md-12 mt-3  ">
                                     <label class="labels">Số điện thoại</label>
-                                    <input type="text" name="sdt" class="form-control" placeholder="<?php echo $sdt; ?>" value="<?php echo $sdt; ?>">
-                                </div>
-                                <div class="col-md-12 mt-3">
-                                    <label class="labels">Lớp</label>
-                                    <input type="text" name="lop" class="form-control" placeholder="<?php echo $lop; ?>" value="<?php echo $lop; ?>">
+                                    <input type="text" name="phone" class="form-control" placeholder="<?=$phone?>" value="<?=$phone?>">
                                 </div>
                                 <div class="col-md-12 mt-3  ">
                                     <label class="labels">Ảnh đại diện</label>
-                                    <input type="file" name="img" class="form-control" placeholder="<?php echo $img; ?>" value="<?php echo $img; ?>">
+                                    <input type="text" name="avatar" class="form-control" placeholder="<?=$avatar?>" value="<?=$avatar?>">
                                 </div>
                             </div>
                             <div class="col-md-6">  
                                     <div class="col-md-12 mt-3">
                                         <label class="labels">Website</label>
-                                        <input type="text" name="website" class="form-control" placeholder="<?php echo $website; ?>" value="<?php echo $website; ?>">
+                                        <input type="text" name="website" class="form-control" placeholder="<?=$website?>" value="<?=$website?>">
                                     </div>
                                     
                                     <div class="col-md-12 mt-3  ">
                                     <label class="labels">Github</label>
-                                    <input type="text" name="github" class="form-control" placeholder="<?php echo $github; ?>" value="<?php echo $github; ?>">
+                                    <input type="text" name="github" class="form-control" placeholder="<?=$github?>" value="<?=$github?>">
                                 </div>
                                 <div class="col-md-12 mt-3  ">
                                     <label class="labels">Twitter</label>
-                                    <input type="text" name="tw" class="form-control" placeholder="<?php echo $tw; ?>" value="<?php echo $tw; ?>">
+                                    <input type="text" name="tw" class="form-control" placeholder="<?=$tw?>" value="<?=$tw?>">
                                 </div>
                                 <div class="col-md-12 mt-3  ">
                                     <label class="labels">Instagram</label>
-                                    <input type="text" name="ig" class="form-control" placeholder="<?php echo $ig; ?>" value="<?php echo $ig; ?>">
+                                    <input type="text" name="ig" class="form-control" placeholder="<?=$ig?>" value="<?=$ig?>">
                                 </div>
                                     
                                 <div class="col-md-12 mt-3  ">
                                     <label class="labels">Facebook</label>
-                                    <input type="text" name="fb" class="form-control" placeholder="<?php echo $fb; ?>" value="<?php echo $fb; ?>">
+                                    <input type="text" name="fb" class="form-control" placeholder="<?=$fb?>" value="<?=$fb?>">
                                 </div>       
                             </div>
                         </div>
                         <div class="mt-5 text-center">
-                            <button class="btn btn-primary  profile-button" name="submit" type="submit">Save Profile</button>
+                            <button class="btn btn-primary  profile-button">Save Profile</button>
                         </div>
                     </form>
                 </div>

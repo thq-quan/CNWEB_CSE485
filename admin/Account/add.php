@@ -2,12 +2,8 @@
 session_start();
 require_once ('../../db/dbhelper.php');
 require_once('../check_admin.php');
-$id =$displayname= $name  = $password =  $type_acc = '';
+$id = $name  = $password =  $type_acc = '';
 if (!empty($_POST)) {
-	if (isset($_POST['displayname'])) {
-		$displayname = $_POST['displayname'];
-
-	}
 	if (isset($_POST['user_name'])) {
 		$name = $_POST['user_name'];
 
@@ -35,7 +31,7 @@ if (!empty($_POST)) {
 		if ($id == '') {
 			if( mysqli_num_rows(select($exist)) < 1) {
 			
-				$sql = 'insert into user(displayname,username, password, type) values("'.$displayname.'","'.$name.'", "'.$password.'" , '.$type_acc.')';
+				$sql = 'insert into user(username, password, type) values("'.$name.'", "'.$password.'" , '.$type_acc.')';
 				select($sql);
 				header('Location: index.php');
 				die();
@@ -52,7 +48,7 @@ if (!empty($_POST)) {
 		}
 		 else {
 		 	if( mysqli_num_rows(select($exist)) < 1) {
-			$sql = 'update user set displayname = "'.$displayname.'", username = "'.$name.'", password = "'.$password.'", type = '.$type_acc.' where id = '.$id;
+			$sql = 'update user set  username = "'.$name.'", password = "'.$password.'", type = '.$type_acc.' where id = '.$id;
 			select($sql);
 			header('Location: index.php');
 			die();
@@ -77,7 +73,6 @@ if (isset($_GET['id'])) {
 	$sql      = 'select * from user where id = '.$id;
 	$user = select_one($sql);
 	if ($user != null) {
-		$displayname 	  = $user['displayname'];
 		$name 	  = $user['username'];
 		$type_acc = $user['type'];
 	}
@@ -122,15 +117,6 @@ if (isset($_GET['id'])) {
 			</div>
 			<div class="panel-body" >
 				<form method="post" style = "width: 50% ; margin-left : 20%;margin-top:3%;">
-
-					<div class="form-group">
-					  <label style="margin-left:30% ;color:#F0F811;font-weight: 600; font-size : 30px" for="display_name">Display Name </label>
-					  <input type="text" name="id" value="<?=$id?>" hidden="true">
-
-					  <input style="text-align:center;font-size : 20px;" required="true" type="text" class="form-control" id="display_name" name="displayname" 
-					  value="<?=$displayname?>" >
-
-					</div>
 
 					<div class="form-group">
 					  <label style="margin-left:30% ;color:#F0F811;font-weight: 600; font-size : 30px" for="user_name">Account Name </label>

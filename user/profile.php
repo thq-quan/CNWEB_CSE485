@@ -1,41 +1,37 @@
 <?php
+    session_start();
     require_once('../db/dbhelper.php');
 
-  session_start();
+    
+    $id = $_GET['id'];
 
-  if(isset($_SESSION['id_tk'])){
-    echo $_SESSION['id_tk'];
-    unset($_SESSION['id_tk']);
-  }
-  
-  if(isset($_GET['id_tk'])){
-    $id_tk = $_GET['id_tk'];
-    $sql = "SELECT * FROM user WHERE id_tk = $id_tk";
+    $sql = "select * from info_user b where id = $id";
+    $name = $address = $email = $phone = $website = $github = $tw = $ig = $fb = $avatar = '';
+    $profile = select_one($sql);
 
-    $result = mysqli_query($conn, $sql);
-    $count = mysqli_num_rows($result);
+    if($profile != null){
+      $name = $profile['name'];
+      $address = $profile['address'];
+      $email = $profile['email'];
+      $phone = $profile['phone'];
+      $website = $profile['website'];
+      $github = $profile['github'];
+      $tw = $profile['tw'];
+      $ig = $profile['ig'];
+      $fb = $profile['fb'];
 
-    if ($count == 1) {
+      $a='../../';
+      $b=" ".$profile["avatar"];
+      if(strpos($b,$a)){ //  kiểm tra a có trong b không
+        $profile["avatar"] = str_replace('../../images','images' ,$profile["avatar"]);
+       }
+      else{
+           $profile["avatar"] = $profile["avatar"] ;
+     
+      }
+      $avatar = $profile['avatar'];
+    }
 
-      $row = mysqli_fetch_assoc($result);
-      $id_tk = $row['id_tk'];
-      $tk = $row['taikhoan'];
-      $ten = $row['ten'];
-      $email = $row['email'];
-      $sdt = $row['sdt'];
-      $diachi = $row['diachi'];
-      $website = $row['website'];
-      $github = $row['github'];
-      $tw = $row['tw'];
-      $ig = $row['ig'];
-      $fb = $row['fb'];
-      $img = $row['img'];
-  }else {
-    echo "Đã có lỗi xảy ra";
-    // header('Location:../home.html');
-  }
-
-  }
   
 ?>
 
@@ -50,11 +46,8 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css"
-        integrity="sha384-UHRtZLI+pbxtHCWp1t77Bi1L4ZtiqrqD80Kn4Z8NTSRyMA2Fd33n5dQ8lWUE00s/" crossorigin="anonymous">
-    <link href="css/bootstrap.min.css" rel="stylesheet">
-    <link href="css/my-sytle.css" rel="stylesheet">
-    <title>Profile</title>
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css">
+    <title>Profile | <?=$name?></title>
 </head>
 <body>
     <section style="background-color: #eee;">
@@ -71,7 +64,7 @@
           </div>
           <div class="row justify-content-start mb-3">
             <div class="col-lg-3">
-              <a href="edit-profile.php?id_tk=<?php echo $id_tk; ?>"><button class="btn btn-success">Edit Profile</button></a>
+              <a href="edit-profile.php?id=<?=$id?>"><button class="btn btn-success">Edit Profile</button></a>
             </div>
           </div>
       
@@ -80,16 +73,16 @@
               <div class="card mb-4">
                 <div class="card-body text-center">
                   <?php
-                       if($img == null){?>
+                       if($avatar == null){?>
                             <img class="rounded-circle img-fluid" style="width: 150px;" src="../img/avata.png">
                         <?php   
                        }else{
                            ?>
-                            <img class="rounded-circle img-fluid" style="width: 150px;" src="../img/<?php echo $img; ?>">
+                            <img class="rounded-circle img-fluid" style="width: 150px;" src="<?=$avatar?>">
                         <?php
                        }
                     ?>
-                  <h5 class="my-3"><?php echo $tk; ?></h5>
+                  <h5 class="my-3"><?=$name?></h5>
                 </div>
               </div>
               <div class="card mb-4 mb-lg-0">
@@ -97,23 +90,23 @@
                   <ul class="list-group list-group-flush rounded-3">
                     <li class="list-group-item d-flex justify-content-between align-items-center p-3">
                       <i class="fas fa-globe fa-lg text-warning"></i>
-                      <p class="mb-0"><?php echo $website; ?></p>
+                      <p class="mb-0"><?=$website?></p>
                     </li>
                     <li class="list-group-item d-flex justify-content-between align-items-center p-3">
                       <i class="fab fa-github fa-lg" style="color: #333333;"></i>
-                      <p class="mb-0"><?php echo $github; ?></p>
+                      <p class="mb-0"><?=$github?></p>
                     </li>
                     <li class="list-group-item d-flex justify-content-between align-items-center p-3">
                       <i class="fab fa-twitter fa-lg" style="color: #55acee;"></i>
-                      <p class="mb-0"><?php echo $tw; ?></p>
+                      <p class="mb-0"><?=$tw?></p>
                     </li>
                     <li class="list-group-item d-flex justify-content-between align-items-center p-3">
                       <i class="fab fa-instagram fa-lg" style="color: #ac2bac;"></i>
-                      <p class="mb-0"><?php echo $ig; ?></p>
+                      <p class="mb-0"><?=$ig?></p>
                     </li>
                     <li class="list-group-item d-flex justify-content-between align-items-center p-3">
                       <i class="fab fa-facebook-f fa-lg" style="color: #3b5998;"></i>
-                      <p class="mb-0"><?php echo $fb; ?></p>
+                      <p class="mb-0"><?=$fb?></p>
                     </li>
                   </ul>
                 </div>
@@ -127,7 +120,7 @@
                       <p class="mb-0">Full Name</p>
                     </div>
                     <div class="col-sm-9">
-                      <p class="text-muted mb-0"><?php echo $ten; ?></p>
+                      <p class="text-muted mb-0"><?=$name?></p>
                     </div>
                   </div>
                   <hr>
@@ -136,7 +129,7 @@
                       <p class="mb-0">Email</p>
                     </div>
                     <div class="col-sm-9">
-                      <p class="text-muted mb-0"><?php echo $email; ?></p>
+                      <p class="text-muted mb-0"><?=$email?></p>
                     </div>
                   </div>
                   <hr>
@@ -145,7 +138,7 @@
                       <p class="mb-0">Phone</p>
                     </div>
                     <div class="col-sm-9">
-                      <p class="text-muted mb-0"><?php echo $sdt; ?></p>
+                      <p class="text-muted mb-0"><?=$phone?></p>
                     </div>
                   </div>
                   <hr>
@@ -154,7 +147,7 @@
                       <p class="mb-0">Address</p>
                     </div>
                     <div class="col-sm-9">
-                      <p class="text-muted mb-0"><?php echo $diachi; ?></p>
+                      <p class="text-muted mb-0"><?=$address?></p>
                     </div>
                   </div>
                 </div>
@@ -208,7 +201,6 @@
       </section>
 
 
-<script src="js/bootstrap.bundle.min.js"></script>
 </body>
 
 </html>
