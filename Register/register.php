@@ -1,10 +1,8 @@
 <?php
     require_once ('../db/dbhelper.php');
     session_start();
-    if (isset($_POST['submit']) && $_POST["ten"] != ''
-    && $_POST["tk"] != '' && $_POST["mk"] != '' && $_POST["mk1"] != '') 
+    if (isset($_POST['submit']) && $_POST["tk"] != '' && $_POST["mk"] != '' && $_POST["mk1"] != '') 
     {   
-        $displayname = $_POST["ten"];
         $username   = $_POST["tk"];
         $password   =($_POST["mk"]);
         $repassword = ($_POST["mk1"]);
@@ -31,7 +29,7 @@
 
             else if($password==$repassword){
                 $password = password_hash($password, PASSWORD_DEFAULT);
-                $sql="insert into user(displayname,username,password) values('$displayname','$username','$password')";
+                $sql="insert into user(username,password) values('$username','$password')";
                  // print($sql);
                  // exit();
                 select($sql);
@@ -71,14 +69,6 @@
                                 <h2 class="fw-bold mb-2 text-uppercase">Sign Up</h2>
                                 <p class="text-white-50 mb-5">Please enter your information!</p>
                                 <form method="POST">
-                                    <div class="row mb-3">
-                                        <div class="col-3 form-outline form-white my-auto">
-                                            <label class="form-label">Display Name</label>
-                                        </div>
-                                        <div class="col-9 form-outline form-white my-auto">
-                                            <input type="text" name="ten" class="form-control form-control-lg">
-                                        </div>
-                                    </div>
                                     <div class="row mb-3">
                                         <div class="col-3 form-outline form-white my-auto">
                                             <label class="form-label">User Name</label>
