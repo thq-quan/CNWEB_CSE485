@@ -3,11 +3,12 @@ require_once ('db/dbhelper.php');
 // session_start();
 
 if (isset($_SESSION['username'])) {
-	 $check = "select type from user where username = '".$_SESSION['username']."'" ;
+	 $check = "select type,id from user where username = '".$_SESSION['username']."'" ;
 
  	$check = select_one($check);
  	if ($check != null) {
  		$status = $check['type'];
+		$id = $check['id'];
  	}
 }
     
@@ -75,7 +76,14 @@ if (isset($_SESSION['username'])) {
 				<?php } else{ ?>
 
 					
-						<a href="admin"><button class="btn btn-success"><i class="">Hello</i> <?=$_SESSION['username']?></button></a>
+						<a href="<?php 
+						if($status == 1){
+							echo "admin/account/index.php";
+							}else{
+								echo "user/profile.php?id=$id";
+							}
+						 ?>">
+						<button class="btn btn-success"><i class="">Hello</i> <?=$_SESSION['username']?></button></a>
 						<a href="logout.php"><button class="btn btn-danger"><i class="fas fa-sign-out-alt"></i>Log-Out</button></a>
 
 						

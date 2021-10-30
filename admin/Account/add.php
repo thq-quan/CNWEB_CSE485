@@ -43,7 +43,7 @@ if (!empty($_POST)) {
 			else{
 				echo "<script>
 			      alert('Username is already in use');
-			      window.location='http://localhost/THQ/admin/Account/add.php';
+			      window.location='http://localhost/CNWEB_CSE485/admin/Account/add.php';
 			      </script>" ;	
 			      die();
 					
@@ -60,7 +60,7 @@ if (!empty($_POST)) {
 			else{
 				echo "<script>
 			      alert('Username is already in use');
-			      window.location='http://localhost/THQ/admin/Account/add.php';
+			      window.location='http://localhost/CNWEB_CSE485/admin/Account/add.php';
 			      </script>" ;	
 			      die();
 					
