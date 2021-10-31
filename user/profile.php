@@ -189,7 +189,14 @@
                 </div>
                 <div class="col-md-6">
                   <div class="card mb-4 mb-md-0">
-                  <h4 class="text-start m-2 p-2">Sự kiện</h4>
+                      <div class="row">
+                        <div class="col-5">
+                        <h4 class="text-start m-2 p-2">Sự kiện</h4>
+                        </div>
+                        <div class="col-7 my-auto">
+                        <a href="../invite.php"><button class="btn btn-primary ">Mời tham gia sự kiện</button></a>
+                        </div>
+                      </div>
                     <div class="card-body border">
                     <?php     
                        foreach($datas_sk as $r){
