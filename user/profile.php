@@ -73,6 +73,7 @@
           <div class="row justify-content-start mb-3">
             <div class="col-lg-3">
               <a href="edit-profile.php?id=<?=$id?>"><button class="btn btn-success">Edit Profile</button></a>
+              <a href="../logout.php"><button class="btn btn-danger">Logout</button></a>
             </div>
           </div>
       
