@@ -1,14 +1,21 @@
-<?
+<?php
     session_start();
-    require_once('../db/dbhelper.php');
-    require_once('send.php');
-
+    include('db/dbhelper.php');
+    include('send.php');
+    // print("checcheck submit");
     if(isset($_POST['submit'])){
+        // print("checcheck submit");
+        // exit();
         $email = $_POST['email'];
         $title = $_POST['title'];
         $content = $_POST['content'];
+        sendEmail($email,$title,$content);
+        echo "<script>
+        alert('Invite successful!!');
+        window.location='index.php';
+        </script>" ;
     }
-    sendEmail($email,$title,$content);
+    
 ?>
 
 
@@ -44,7 +51,7 @@
 
     <div class="container">
         <div class="m-5 border border-info">
-            <form action="" method="post">
+            <form method="post">
                 <div class="row mt-3">
                     <div class="col-md-3 my-auto text-center">
                         <label class="labels">Email người được mời</label>
