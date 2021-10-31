@@ -6,7 +6,7 @@
     $id = $_GET['id'];
 
     $sql = "select * from info_user b where id = $id";
-    $name = $address = $email = $phone = $website = $github = $tw = $ig = $fb = $avatar = '';
+    $name = $address = $email = $phone = $website = $github = $tw = $ig = $fb = $avatar = $id_sukien = '';
     $profile = select_one($sql);
 
     if($profile != null){
@@ -31,6 +31,14 @@
       }
       $avatar = $profile['avatar'];
     }
+
+    $list = "SELECT * FROM user_chat WHERE id = $id";
+    $datas = select_list($list);
+    // print_r($datas);
+    // exit();
+    $list_sk = "SELECT * FROM user_event WHERE id = $id";
+    $datas_sk = select_list($list_sk);
+
 
   
 ?>
@@ -155,42 +163,52 @@
               <div class="row">
                 <div class="col-md-6">
                   <div class="card mb-4 mb-md-0">
+                    <h4 class="text-center border border-dark m-2 p-2">Nhóm chat đã tham gia</h4>
                     <div class="card-body">
-
+                       <?php     
+                       foreach($datas as $r){
+                          $user_event = "SELECT * FROM gr_chat WHERE id_gr = ".$r['id_gr']."";
+                          $data_event = select_one($user_event);
+                        ?>
                       <div class="row border-bottom border-primary mt-2 mb-2">
                         <div class="col-9">
-                            <h4>Họp mặt cựu sinh viên K60</h4>
-                            <p>Time:19/02/2022</p>
+                            <h5>Group: <a href="" class="text-decoration-none"><?php echo $data_event['name_gr']; ?></a></h5>
+                            <p>Ngày tạo: <?php echo $data_event['date_gr']; ?></p>
                         </div>
+                      
                         <div class="col-3 my-auto">
-                            <button class="btn btn-dark">Xem</button>
+                            <a href=""><button class="btn btn-success">Vào</button></a>
                         </div>                       
                       </div>
-                      <div class="row border-bottom border-primary mt-2 mb-2">
-                        <div class="col-9">
-                            <h4>Họp mặt cựu sinh viên K60</h4>
-                            <p>Time:19/02/2022</p>
-                        </div>
-                        <div class="col-3 my-auto">
-                            <button class="btn btn-dark">Xem</button>
-                        </div>                        
-                      </div>
+                      <?php
+                       } 
+                      ?>
 
                     </div>
                   </div>
                 </div>
                 <div class="col-md-6">
                   <div class="card mb-4 mb-md-0">
-                    <div class="card-body">
-
-                      <div class="row border-bottom border-primary mb-2 mt-2">
+                  <h4 class="text-start m-2 p-2">Sự kiện</h4>
+                    <div class="card-body border">
+                    <?php     
+                       foreach($datas_sk as $r){
+                          $user_event = "SELECT * FROM event WHERE id_sukien = ".$r['id_sukien']."";
+                          $data_event = select_one($user_event);
+                        ?>
+                      <div class="row border-bottom border-primary mt-2 mb-2">
                         <div class="col-9">
-                          <h4>Chat1</h4>
+                            <h5><a href="../detail.php?id=<?=$data_event['id_sukien']?>" class="text-decoration-none"><?php echo $data_event['ten_sukien']; ?></a></h5>
+                            <p>Thời gian: <?php echo $data_event['date_sukien']; ?></p>
                         </div>
+                      
                         <div class="col-3 my-auto">
-                            <button class="btn btn-dark">Vào</button>
-                        </div> 
+                            <a href="../detail.php?id=<?=$data_event['id_sukien']?>"><button class="btn btn-success">Xem</button></a>
+                        </div>                       
                       </div>
+                      <?php
+                       } 
+                      ?>
                     </div>
                   </div>
                 </div>
