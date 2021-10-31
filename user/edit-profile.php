@@ -1,91 +1,8 @@
 <?php
     require_once('../db/dbhelper.php');
     session_start();
-
-    // $id = $_GET['id'];
-    // $sql = "select * from info_user where id = $id";
-    $name = $dateofbirth = $sex = $address = $email = $phone = $website = $github = $tw = $ig = $fb = $avatar = '';
-    // $profile = select_one($sql);
-    // print_r($profile);
-    // exit();
     
-    // if($profile != null){
-    //     $name = $profile['name'];
-    //     $dateofbirth = $profile['dateofbirth'];
-    //     $sex = $profile['sex'];
-    //     $address = $profile['address'];
-    //     $email = $profile['email'];
-    //     $phone = $profile['phone'];
-    //     $website = $profile['website'];
-    //     $github = $profile['github'];
-    //     $tw = $profile['tw'];
-    //     $ig = $profile['ig'];
-    //     $fb = $profile['fb'];
-  
-    //     $a='../../';
-    //     $b=" ".$profile["avatar"];
-    //     if(strpos($b,$a)){ //  kiểm tra a có trong b không
-    //       $profile["avatar"] = str_replace('../../images','images' ,$profile["avatar"]);
-    //      }
-    //     else{
-    //          $profile["avatar"] = $profile["avatar"] ;
-       
-    //     }
-    //     $avatar = $profile['avatar'];
-    //   }
-
-    //   if (!empty($_POST)){
-    //     if (isset($_POST['name'])) {
-    //         $name = $_POST['name'];
-    //     }
-    //     if (isset($_POST['dateofbirth'])) {
-    //         $dateofbirth = $_POST['dateofbirth'];
-    //     }
-    //     if (isset($_POST['sex'])) {
-    //         $sex = $_POST['sex'];
-    //     }
-    //     if (isset($_POST['address'])) {
-    //         $address = $_POST['address'];
-    //     }
-    //     if (isset($_POST['email'])) {
-    //         $email = $_POST['email'];
-    //     }
-    //     if (isset($_POST['phone'])) {
-    //         $phone = $_POST['phone'];
-    //     }
-    //     if (isset($_POST['avatar'])) {
-    //         $avatar = $_POST['avatar'];
-    //     }
-    //     if (isset($_POST['website'])) {
-    //         $website = $_POST['website'];
-    //     }
-    //     if (isset($_POST['github'])) {
-    //         $github = $_POST['github'];
-    //     }
-    //     if (isset($_POST['tw'])) {
-    //         $tw = $_POST['tw'];
-    //     }
-    //     if (isset($_POST['ig'])) {
-    //         $ig = $_POST['ig'];
-    //     }
-    //     if (isset($_POST['fb'])) {
-    //         $fb = $_POST['fb'];
-    //     }
-
-        
-	// if (!empty($name)) {
-	// 	$id = $_GET['id'];
-	// 	$sql = 'update info_user set name = "'.$name.'", dateofbirth = "'.$dateofbirth.'", sex = "'.$sex.'", address = "'.$address.'", email = "'.$email.'",
-    //     phone = "'.$phone.'", website = "'.$website.'", github = "'.$github.'", tw = "'.$tw.'", ig = "'.$ig.'", fb = "'.$fb.'" where id = '.$id;
-	// 	select($sql);
-    //     echo "<script>
-    //     alert('Username is already in use');
-    //     window.location='http://localhost/CNWEB_CSE485/user/profile.php?id=$id';
-    //     </script>" ;	
-    //     die();
-	// }
-
-    //   }
+    $name = $dateofbirth = $sex = $address = $email = $phone = $website = $github = $tw = $ig = $fb = $avatar = '';
     $id_now = ' select id from user where username = "'.$_SESSION['username'].'"';
 		$id_user     = select_one($id_now);
 		if ($id_user != null) {
@@ -192,7 +109,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css">
-    <title></title>
+    <title>Profile | <?=$name?></title>
 </head>
 
 <body>
