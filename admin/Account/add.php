@@ -108,6 +108,13 @@ if (isset($_GET['id'])) {
 	    <a class="nav-link " style="font-weight:bold" href="../Post/">Event Management</a>
 
 	  </li>
+	  <li class="nav-item">
+	    <a class="nav-link  " style="border-right: 2px solid white;" href="../Unit">Unit Management</a>
+
+	</li>
+    <li class="nav-item">
+	    <a class="nav-link " style="border-right: 2px solid white;" href="../SchoolYear">School year Management</a>
+	</li>
 	</ul>
 
 	<div class="container">
