@@ -67,6 +67,9 @@ require_once('../check_admin.php');
 				<a href="add.php">
 					<button class="btn btn-success" style="margin-bottom: 70px;">New Post</button>
 				</a>
+				<a href="../../invite.php">
+					<button class="btn btn-success" style="margin-bottom: 70px;">Invite</button>
+				</a>
 				<form action="" method="GET">
 					<div class="select" style=" margin-top : -50px; margin-left:150px;">
 

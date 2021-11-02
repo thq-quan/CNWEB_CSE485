@@ -97,7 +97,7 @@ if (isset($_GET['id'])) {
 	<!-- Latest compiled JavaScript -->
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
 </head>
-<body style="background-image: url(https://vinuni.edu.vn/wp-content/uploads/2020/05/QuangTruong3-scaled.jpg) ; overflow-y: hidden;">
+<body style="background:url('http://khohinhdep.com/wp-content/uploads/2017/10/hinh-nen-dien-thoai-lg-v20-chat-luong-qhd-010.jpg'); overflow-y: hidden;">
 	<ul class="nav nav-tabs">
 	  
 	  
@@ -120,25 +120,25 @@ if (isset($_GET['id'])) {
 	<div class="container">
 		<div class="panel panel-primary">
 			<div class="panel-heading">
-				<h2 class="text-center" style=" margin-left : -10%;margin-top:3%;color: #FFFFFF;">Add/Update Account</h2>
+				<h2 class="text-center text-dark" style=" margin-left : -10%;margin-top:3%;color: #FFFFFF;">Add/Update Account</h2>
 			</div>
 			<div class="panel-body" >
 				<form method="post" style = "width: 50% ; margin-left : 20%;margin-top:3%;">
 
 					<div class="form-group">
-					  <label style="margin-left:30% ;color:#F0F811;font-weight: 600; font-size : 30px" for="user_name">Account Name </label>
+					  <label style="margin-left:30% ;font-weight: 600; font-size : 30px" for="user_name">Account Name </label>
 
 					  <input style="text-align:center;font-size : 20px;" required="true" type="text" class="form-control" id="user_name" name="user_name" 
 					  value="<?=$name?>" >
 
 					</div>
 					<div class="form-group">
-					  <label style="margin-left:30% ;color:#F0F811;font-weight: 600; font-size : 30px" for="password">Password</label>
+					  <label style="margin-left:30% ;font-weight: 600; font-size : 30px" for="password">Password</label>
 					  
 					  <input style="text-align:center;font-size : 20px;" required="true" type="text" class="form-control" id="password" name="password" value="<?=$password?>" >
 					</div>
 					<div class="form-group">
-					  <label style="margin-left:30% ;color:#F0F811;font-weight: 600; font-size : 30px" for="password">Account Type</label>
+					  <label style="margin-left:30% ;font-weight: 600; font-size : 30px" for="password">Account Type</label>
 					  
 					  <select style="padding-left: 42% ;font-size : 20px;" required="true" type="text" class="form-control" id="type" name="type" value="<?=$type_acc?>" >
 					  	<option  value="1" <?php if( $type_acc!="" && $type_acc==1) echo "selected"?> >Admin</option>
