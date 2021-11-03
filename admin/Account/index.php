@@ -68,6 +68,7 @@ require_once('../check_admin.php');
 							<th class="text-warning"> Change account type</th>
 							<th width="50px"></th>
 							<th width="50px"></th>
+							<th width="50px"></th>
 						</tr>
 					</thead>
 					<tbody>
@@ -100,6 +101,9 @@ foreach ($userList as $item) {
 				<td>
 					<button class="btn btn-danger" onclick="deleteAccount('.$item['id'].')">Delete</button>
 				</td>
+				<td>
+				<a href="../../user/edit-profile.php?id='.$item['id'].'"><button class="btn btn-success">Profile</button></a>
+			</td>
 			</tr>';
 }
 ?>

@@ -207,6 +207,9 @@
                             <button class="btn btn-primary  profile-button" name = "save" type = "submit">Save Profile</button>
                         </div>
                     </form>
+                   <div class="mt-2 text-center">
+                        <a href="../index.php"><button class="btn btn-success  profile-button">Home</button></a>
+                   </div>
                 </div>
             </div>
         </div>
